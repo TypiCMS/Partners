@@ -15,7 +15,7 @@
             "migrations"
         ],
         "psr-4": {
-            "TypiCMS\\Modules\\Partners\\": ""
+            "TypiCMS\\Modules\\Partners\\": "src/"
         }
     },
     "minimum-stability": "stable"
