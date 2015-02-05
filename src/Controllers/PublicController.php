@@ -29,7 +29,7 @@ class PublicController extends BasePublicController
 
         $partners = $this->repository->getAll();
 
-        $this->layout->content = View::make('partners.public.index')
+        return view('partners.public.index')
             ->withPartners($partners);
     }
 
@@ -46,7 +46,7 @@ class PublicController extends BasePublicController
 
         $this->title['parent'] = $model->title;
 
-        $this->layout->content = View::make('partners.public.show')
+        return view('partners.public.show')
             ->withModel($model);
     }
 }
