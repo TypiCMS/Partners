@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Partners\Controllers;
 
-use Str;
+use Illuminate\Support\Str;
 use View;
 use TypiCMS;
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface;

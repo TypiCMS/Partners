@@ -1,30 +1,21 @@
 <?php
 namespace TypiCMS\Modules\Partners\Providers;
 
-use Lang;
-use View;
 use Config;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-
-// Model
+use Illuminate\Support\ServiceProvider;
+use Lang;
 use TypiCMS\Modules\Partners\Models\Partner;
 use TypiCMS\Modules\Partners\Models\PartnerTranslation;
-
-// Repo
-use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
-
-// Cache
 use TypiCMS\Modules\Partners\Repositories\CacheDecorator;
-use TypiCMS\Services\Cache\LaravelCache;
-
-// Form
+use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 use TypiCMS\Modules\Partners\Services\Form\PartnerForm;
 use TypiCMS\Modules\Partners\Services\Form\PartnerFormLaravelValidator;
-
-// Observers
-use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Observers\FileObserver;
+use TypiCMS\Observers\SlugObserver;
+use TypiCMS\Services\Cache\LaravelCache;
+use View;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -35,9 +26,19 @@ class ModuleProvider extends ServiceProvider
         require __DIR__ . '/../routes.php';
 
         // Add dirs
-        View::addLocation(__DIR__ . '/../Views');
-        Lang::addNamespace('partners', __DIR__ . '/../lang');
-        Config::addNamespace('partners', __DIR__ . '/../config');
+        View::addNamespace('partners', __DIR__ . '/../views/');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'partners');
+        $this->publishes([
+            __DIR__ . '/../config/' => config_path('typicms/partners'),
+        ], 'config');
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations'),
+        ], 'migrations');
+
+        AliasLoader::getInstance()->alias(
+            'Partners',
+            'TypiCMS\Modules\Partners\Facades\Facade'
+        );
 
         // Observers
         PartnerTranslation::observe(new SlugObserver);
@@ -69,10 +70,6 @@ class ModuleProvider extends ServiceProvider
                 new PartnerFormLaravelValidator($app['validator']),
                 $app->make('TypiCMS\Modules\Partners\Repositories\PartnerInterface')
             );
-        });
-
-        $app->before(function ($request, $response) {
-            require __DIR__ . '/../breadcrumbs.php';
         });
 
     }
