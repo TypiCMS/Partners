@@ -45,14 +45,14 @@
                         <button class="btn btn-default btn-slug @if($errors->has($lang.'.slug'))btn-danger @endif" type="button">@lang('validation.attributes.generate')</button>
                     </span>
                 </div>
-                {{ $errors->first($lang.'.slug', '<p class="help-block">:message</p>') }}
+                {!! $errors->first($lang.'.slug', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         {!! BootForm::checkbox(trans('labels.online'), $lang.'[status]') !!}
         <div class="form-group @if($errors->has($lang.'.website'))has-error @endif">
             {{ Form::label($lang.'[website]', trans('validation.attributes.website'), array('class' => 'control-label')) }}
             {{ Form::text($lang.'[website]', $model->translate($lang)->website, array('class' => 'form-control', 'placeholder' => 'http://')) }}
-            {{ $errors->first($lang.'.website', '<p class="help-block">:message</p>') }}
+            {!! $errors->first($lang.'.website', '<p class="help-block">:message</p>') !!}
         </div>
         {!! BootForm::textarea(trans('labels.body'), $lang.'[body]')->addClass('editor') !!}
     </div>
