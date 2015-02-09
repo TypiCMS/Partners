@@ -1,3 +1,5 @@
+@extends('core::public.master')
+
 @section('main')
 
     <h2>{{ $model->title }}</h2>
