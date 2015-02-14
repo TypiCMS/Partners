@@ -1,9 +1,9 @@
 <?php
-namespace TypiCMS\Modules\Partners\Controllers;
+namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
 use TypiCMS\Modules\Partners\Services\Form\PartnerForm;
-use TypiCMS\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\AdminSimpleController;
 
 class AdminController extends AdminSimpleController
 {

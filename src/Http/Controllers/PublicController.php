@@ -1,11 +1,11 @@
 <?php
-namespace TypiCMS\Modules\Partners\Controllers;
+namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use Illuminate\Support\Str;
 use View;
 use TypiCMS;
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
-use TypiCMS\Controllers\BasePublicController;
+use TypiCMS\Http\Controllers\BasePublicController;
 
 class PublicController extends BasePublicController
 {
