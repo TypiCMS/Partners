@@ -10,8 +10,6 @@ use TypiCMS\Modules\Partners\Models\Partner;
 use TypiCMS\Modules\Partners\Models\PartnerTranslation;
 use TypiCMS\Modules\Partners\Repositories\CacheDecorator;
 use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
-use TypiCMS\Modules\Partners\Services\Form\PartnerForm;
-use TypiCMS\Modules\Partners\Services\Form\PartnerFormLaravelValidator;
 use TypiCMS\Observers\FileObserver;
 use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Services\Cache\LaravelCache;
@@ -65,13 +63,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], 'partners', 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        $app->bind('TypiCMS\Modules\Partners\Services\Form\PartnerForm', function (Application $app) {
-            return new PartnerForm(
-                new PartnerFormLaravelValidator($app['validator']),
-                $app->make('TypiCMS\Modules\Partners\Repositories\PartnerInterface')
-            );
         });
 
     }
