@@ -16,4 +16,23 @@ class FormRequest extends AbstractFormRequest {
         }
         return $rules;
     }
+
+    /**
+     * Sanitize inputs
+     * 
+     * @return array
+     */
+    public function sanitize()
+    {
+        $input = $this->all();
+
+        // Checkboxes
+        $input['homepage'] = $this->has('homepage');
+        foreach (config('translatable.locales') as $locale) {
+            $input[$locale]['status'] = $this->has($locale . '.status');
+        }
+
+        $this->replace($input);
+        return $this->all();
+    }
 }
