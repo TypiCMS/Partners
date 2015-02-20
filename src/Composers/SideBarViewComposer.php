@@ -1,18 +1,25 @@
 <?php
 namespace TypiCMS\Modules\Partners\Composers;
 
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Sidebar\SidebarGroup;
+use Maatwebsite\Sidebar\SidebarItem;
+use TypiCMS\Composers\BaseSidebarViewComposer;
 
-class SidebarViewComposer
+class SidebarViewComposer extends BaseSidebarViewComposer
 {
     public function compose(View $view)
     {
-        $view->menus['content']->put('partners', [
-            'weight' => config('typicms.partners.sidebar.weight'),
-            'request' => $view->prefix . '/partners*',
-            'route' => 'admin.partners.index',
-            'icon-class' => 'icon fa fa-fw fa-cubes',
-            'title' => 'Partners',
-        ]);
+        $view->sidebar->group(trans('global.menus.content'), function (SidebarGroup $group) {
+            $group->addItem(trans('partners::global.name'), function (SidebarItem $item) {
+                $item->icon = config('typicms.partners.sidebar.icon', 'icon fa fa-fw fa-cubes');
+                $item->weight = config('typicms.partners.sidebar.weight');
+                $item->route('admin.partners.index');
+                $item->append('admin.partners.create');
+                $item->authorize(
+                    $this->auth->hasAccess('partners.index')
+                );
+            });
+        });
     }
 }
