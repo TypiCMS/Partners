@@ -32,6 +32,7 @@
         @include('core::form._title-and-slug')
         {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
         {!! BootForm::text(trans('validation.attributes.website'), $lang.'[website]') !!}
+        {!! BootForm::textarea(trans('validation.attributes.summary'), $lang.'[summary]')->rows(4) !!}
         {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('editor') !!}
     </div>
 

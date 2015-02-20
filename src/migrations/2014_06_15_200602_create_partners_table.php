@@ -37,6 +37,8 @@ class CreatePartnersTable extends Migration
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('website')->nullable();
+
+            $table->text('summary');
             $table->text('body');
 
             $table->timestamps();

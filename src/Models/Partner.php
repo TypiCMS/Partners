@@ -24,6 +24,7 @@ class Partner extends Base
         'homepage',
         'status',
         'website',
+        'summary',
         'body',
     );
 
@@ -37,6 +38,7 @@ class Partner extends Base
         'slug',
         'status',
         'website',
+        'summary',
         'body',
     );
 

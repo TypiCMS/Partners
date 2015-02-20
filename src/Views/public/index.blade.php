@@ -1,8 +1,11 @@
 @extends('core::public.master')
 
+@section('title', trans('partners::global.name') . ' – ' . $websiteTitle)
+@section('ogTitle', trans('partners::global.name'))
+
 @section('main')
 
-    <h2>{{ Illuminate\Support\Str::title(trans_choice('partners::global.partners', 2)) }}</h2>
+    <h2>@lang('partners::global.name')</h2>
 
     <div class="row partners">
         @foreach ($partners as $partner)

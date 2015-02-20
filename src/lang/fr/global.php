@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'partenaires',
+    'name' => 'Partenaires',
     'partners' => 'partenaire|partenaires',
     'New'  => 'Nouveau partenaire',
     'Edit' => 'Modifier le partenaire',
