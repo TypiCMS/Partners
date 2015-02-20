@@ -8,8 +8,8 @@ class FormRequest extends AbstractFormRequest {
     public function rules()
     {
         $rules = [
-            'position'       => 'required|integer|min:1',
-            'logo'           => 'image|image_aspect:1|image_size:>=200,>=200|max:2000',
+            'position' => 'required|integer|min:1',
+            'image'    => 'image|max:2000|image_size:>=500',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules[$locale . '.website'] = 'url';
