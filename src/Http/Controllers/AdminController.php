@@ -3,9 +3,9 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
-use TypiCMS\Http\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\BaseAdminController;
 
-class AdminController extends AdminSimpleController
+class AdminController extends BaseAdminController
 {
 
     public function __construct(PartnerInterface $partner)
