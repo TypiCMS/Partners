@@ -13,7 +13,6 @@ class PublicController extends BasePublicController
     public function __construct(PartnerInterface $partner)
     {
         parent::__construct($partner);
-        $this->title['parent'] = Str::title(trans_choice('partners::global.partners', 2));
     }
 
     /**
@@ -24,8 +23,6 @@ class PublicController extends BasePublicController
     public function index()
     {
         TypiCMS::setModel($this->repository->getModel());
-
-        $this->title['child'] = '';
 
         $partners = $this->repository->getAll();
 
@@ -43,8 +40,6 @@ class PublicController extends BasePublicController
         $model = $this->repository->bySlug($slug);
 
         TypiCMS::setModel($model);
-
-        $this->title['parent'] = $model->title;
 
         return view('partners::public.show')
             ->with(compact('model'));
