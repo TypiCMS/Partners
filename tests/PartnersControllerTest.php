@@ -3,15 +3,11 @@ use TypiCMS\Modules\Partners\Models\Partner;
 
 class PartnersControllerTest extends TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-    }
 
     public function testAdminIndex()
     {
-        $this->get('admin/partners');
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $response = $this->call('GET', 'admin/partners');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testStoreFails()
