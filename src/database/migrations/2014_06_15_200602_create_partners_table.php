@@ -32,7 +32,7 @@ class CreatePartnersTable extends Migration
 
             $table->string('locale');
 
-            $table->tinyInteger('status')->default(0);
+            $table->boolean('status')->default(0);
 
             $table->string('title');
             $table->string('slug')->nullable();
