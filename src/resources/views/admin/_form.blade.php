@@ -18,6 +18,7 @@
 
 <div class="tab-content">
 
+<input type="hidden" name="homepage" value="0">
 {!! BootForm::checkbox(trans('validation.attributes.homepage'), 'homepage') !!}
 
 <div class="row">
@@ -30,6 +31,7 @@
 
     <div class="tab-pane fade @if($locale == $lang)in active @endif" id="content-{{ $lang }}">
         @include('core::form._title-and-slug')
+        <input type="hidden" name="{{ $lang }}[status]" value="0">
         {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
         {!! BootForm::text(trans('validation.attributes.website'), $lang.'[website]') !!}
         {!! BootForm::textarea(trans('validation.attributes.summary'), $lang.'[summary]')->rows(4) !!}
