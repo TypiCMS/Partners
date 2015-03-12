@@ -24,7 +24,7 @@ class PublicController extends BasePublicController
     {
         TypiCMS::setModel($this->repository->getModel());
 
-        $partners = $this->repository->getAll();
+        $partners = $this->repository->all();
 
         return view('partners::public.index')
             ->with(compact('partners'));
