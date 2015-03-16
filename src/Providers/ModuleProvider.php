@@ -65,7 +65,7 @@ class ModuleProvider extends ServiceProvider
 
         $app->bind('TypiCMS\Modules\Partners\Repositories\PartnerInterface', function (Application $app) {
             $repository = new EloquentPartner(new Partner);
-            if (! Config::get('app.cache')) {
+            if (! config('typicms.cache')) {
                 return $repository;
             }
             $laravelCache = new LaravelCache($app['cache'], 'partners', 10);
