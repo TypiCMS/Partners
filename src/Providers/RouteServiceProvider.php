@@ -42,12 +42,12 @@ class RouteServiceProvider extends ServiceProvider {
             /**
              * Front office routes
              */
-            if ($page = TypiCMS::getPageLinkedToModule('places')) {
+            if ($page = TypiCMS::getPageLinkedToModule('partners')) {
                 foreach (config('translatable.locales') as $lang) {
-                    if ($page->hasTranslation($lang)) {
-                        $uri = $page->translate($lang)->uri;
-                        $router->get($uri, ['as' => $lang.'.partners', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'/{slug}', ['as' => $lang.'.partners.slug', 'uses' => 'PublicController@show']);
+                    $options = $page->private ? ['middleware' => 'auth'] : [] ;
+                    if ($uri = $page->uri($lang)) {
+                        $router->get($uri, $options + ['as' => $lang.'.partners', 'uses' => 'PublicController@index']);
+                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.partners.slug', 'uses' => 'PublicController@show']);
                     }
                 }
             }
