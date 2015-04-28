@@ -22,10 +22,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        TypiCMS::setModel($this->repository->getModel());
-
         $models = $this->repository->all();
-
         return view('partners::public.index')
             ->with(compact('models'));
     }
@@ -38,9 +35,6 @@ class PublicController extends BasePublicController
     public function show($slug)
     {
         $model = $this->repository->bySlug($slug);
-
-        TypiCMS::setModel($model);
-
         return view('partners::public.show')
             ->with(compact('model'));
     }
