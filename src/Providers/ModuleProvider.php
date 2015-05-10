@@ -10,9 +10,9 @@ use TypiCMS\Modules\Partners\Models\Partner;
 use TypiCMS\Modules\Partners\Models\PartnerTranslation;
 use TypiCMS\Modules\Partners\Repositories\CacheDecorator;
 use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
-use TypiCMS\Observers\FileObserver;
-use TypiCMS\Observers\SlugObserver;
-use TypiCMS\Services\Cache\LaravelCache;
+use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use View;
 
 class ModuleProvider extends ServiceProvider

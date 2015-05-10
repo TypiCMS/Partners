@@ -3,7 +3,7 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
-use TypiCMS\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 
 class AdminController extends BaseAdminController
 {
