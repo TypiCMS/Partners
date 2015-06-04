@@ -1,5 +1,5 @@
 @extends('core::public.master')
-<?php $page = TypiCMS::getPageLinkedToModule('partners') ?>
+@inject('page', 'typicms.partners.page')
 
 @section('title', $model->title . ' – ' . trans('news::global.name') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
