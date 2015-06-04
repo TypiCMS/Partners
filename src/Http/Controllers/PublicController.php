@@ -1,11 +1,9 @@
 <?php
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
-use Illuminate\Support\Str;
-use View;
 use TypiCMS;
-use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
 
 class PublicController extends BasePublicController
 {
@@ -18,7 +16,7 @@ class PublicController extends BasePublicController
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function index()
     {
@@ -30,7 +28,7 @@ class PublicController extends BasePublicController
     /**
      * Show news.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function show($slug)
     {
