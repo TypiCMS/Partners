@@ -2,7 +2,7 @@
 return [
     'per_page' => 50,
     'order' => [
-        'position' => 'desc',
+        'position' => 'asc',
     ],
     'sidebar' => [
         'weight' => 8,
