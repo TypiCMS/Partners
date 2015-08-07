@@ -15,7 +15,7 @@
         {!! $model->present()->thumb(null, 200) !!}
         <p><a href="{{ $model->website }}" target="_blank">{{ $model->website }}</a></p>
         <p class="summary">{{ nl2br($model->summary) }}</p>
-        <div class="body">{!! $model->body !!}</div>
+        <div class="body">{!! $model->present()->body !!}</div>
     </article>
 
 @stop
