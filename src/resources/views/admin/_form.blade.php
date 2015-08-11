@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-sm-2 form-group @if($errors->has('position'))has-error @endif">
-        {!! BootForm::text(trans('validation.attributes.position'), 'position')->value(1) !!}
+        {!! BootForm::text(trans('validation.attributes.position'), 'position') !!}
     </div>
 </div>
 
