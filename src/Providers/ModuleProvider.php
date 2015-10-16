@@ -61,6 +61,13 @@ class ModuleProvider extends ServiceProvider
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Partners\Composers\SidebarViewComposer');
 
+        /**
+         * Add the page in the view.
+         */
+        $app->view->composer('partners::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('partners');
+        });
+
         $app->bind('TypiCMS\Modules\Partners\Repositories\PartnerInterface', function (Application $app) {
             $repository = new EloquentPartner(new Partner);
             if (! config('typicms.cache')) {
@@ -69,13 +76,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], 'partners', 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        /**
-         * Return the page linked to this module (for @inject in views)
-         */
-        $app->singleton('typicms.partners.page', function (Application $app) {
-            return TypiCMS::getPageLinkedToModule('partners');
         });
 
     }
