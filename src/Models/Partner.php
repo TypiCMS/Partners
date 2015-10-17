@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\Partners\Models;
 
 use Dimsav\Translatable\Translatable;
@@ -8,14 +9,13 @@ use TypiCMS\Modules\History\Traits\Historable;
 
 class Partner extends Base
 {
-
     use Historable;
     use PresentableTrait;
     use Translatable;
 
     protected $presenter = 'TypiCMS\Modules\Partners\Presenters\ModulePresenter';
 
-    protected $fillable = array(
+    protected $fillable = [
         'image',
         // Translatable columns
         'title',
@@ -26,21 +26,21 @@ class Partner extends Base
         'website',
         'summary',
         'body',
-    );
+    ];
 
     /**
      * Translatable model configs.
      *
      * @var array
      */
-    public $translatedAttributes = array(
+    public $translatedAttributes = [
         'title',
         'slug',
         'status',
         'website',
         'summary',
         'body',
-    );
+    ];
 
     protected $appends = ['status', 'title', 'thumb', 'website'];
 
@@ -49,13 +49,14 @@ class Partner extends Base
      *
      * @var array
      */
-    public $attachments = array(
+    public $attachments = [
         'image',
-    );
+    ];
 
     /**
      * Get attribute from translation table
-     * and append it to main model attributes
+     * and append it to main model attributes.
+     *
      * @return string title
      */
     public function getWebsiteAttribute()
