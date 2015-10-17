@@ -1,10 +1,11 @@
 <?php
+
 namespace TypiCMS\Modules\Partners\Http\Requests;
 
 use TypiCMS\Modules\Core\Http\Requests\AbstractFormRequest;
 
-class FormRequest extends AbstractFormRequest {
-
+class FormRequest extends AbstractFormRequest
+{
     public function rules()
     {
         $rules = [
@@ -12,8 +13,9 @@ class FormRequest extends AbstractFormRequest {
             'image'    => 'image|max:2000',
         ];
         foreach (config('translatable.locales') as $locale) {
-            $rules[$locale . '.website'] = 'url';
+            $rules[$locale.'.website'] = 'url';
         }
+
         return $rules;
     }
 }
