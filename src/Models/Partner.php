@@ -17,11 +17,11 @@ class Partner extends Base
 
     protected $fillable = [
         'image',
+        'position',
+        'homepage',
         // Translatable columns
         'title',
         'slug',
-        'position',
-        'homepage',
         'status',
         'website',
         'summary',
