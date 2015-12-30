@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
+use TypiCMS\Modules\Partners\Models\Partner;
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
 
 class AdminController extends BaseAdminController
@@ -16,29 +17,29 @@ class AdminController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param FormRequest $request
+     * @param \TypiCMS\Modules\Partners\Http\Requests\FormRequest $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(FormRequest $request)
     {
-        $model = $this->repository->create($request->all());
+        $partner = $this->repository->create($request->all());
 
-        return $this->redirect($request, $model);
+        return $this->redirect($request, $partner);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  $model
-     * @param FormRequest $request
+     * @param \TypiCMS\Modules\Partners\Models\Partner            $partner
+     * @param \TypiCMS\Modules\Partners\Http\Requests\FormRequest $request
      *
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($model, FormRequest $request)
+    public function update(Partner $partner, FormRequest $request)
     {
         $this->repository->update($request->all());
 
-        return $this->redirect($request, $model);
+        return $this->redirect($request, $partner);
     }
 }
