@@ -18,20 +18,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'TypiCMS\Modules\Partners\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-
-        $router->model('partners', 'TypiCMS\Modules\Partners\Models\Partner');
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -58,12 +44,18 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->resource('admin/partners', 'AdminController');
+            $router->get('admin/partners', ['as' => 'admin.partners.index', 'uses' => 'AdminController@index']);
+            $router->get('admin/partners/create', ['as' => 'admin.partners.create', 'uses' => 'AdminController@create']);
+            $router->get('admin/partners/{partner}/edit', ['as' => 'admin.partners.edit', 'uses' => 'AdminController@edit']);
+            $router->post('admin/partners', ['as' => 'admin.partners.store', 'uses' => 'AdminController@store']);
+            $router->put('admin/partners/{partner}', ['as' => 'admin.partners.update', 'uses' => 'AdminController@update']);
 
             /*
              * API routes
              */
-            $router->resource('api/partners', 'ApiController');
+            $router->get('api/partners', ['as' => 'api.partners.index', 'uses' => 'ApiController@index']);
+            $router->put('api/partners/{partner}', ['as' => 'api.partners.update', 'uses' => 'ApiController@update']);
+            $router->delete('api/partners/{partner}', ['as' => 'api.partners.destroy', 'uses' => 'ApiController@destroy']);
         });
     }
 }

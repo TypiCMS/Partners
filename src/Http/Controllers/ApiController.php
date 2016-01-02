@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Partners\Models\Partner;
 use TypiCMS\Modules\Partners\Repositories\PartnerInterface as Repository;
 
 class ApiController extends BaseApiController
