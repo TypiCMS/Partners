@@ -5,7 +5,9 @@
         <span>@{{ models.length }} @choice('partners::global.partners', 2)</span>
     </h1>
 
-    @include('core::admin._tabs-lang-list')
+    <div class="btn-toolbar">
+        @include('core::admin._lang-switcher')
+    </div>
 
     <div class="table-responsive">
 
