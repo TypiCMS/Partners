@@ -12,4 +12,4 @@
     @include('partners::public._list', ['items' => $models])
     @endif
 
-@stop
+@endsection
