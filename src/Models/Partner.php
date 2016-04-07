@@ -54,10 +54,39 @@ class Partner extends Base
     ];
 
     /**
-     * Get attribute from translation table
-     * and append it to main model attributes.
+     * Append status attribute from translation table.
+     *
+     * @return string
+     */
+    public function getStatusAttribute($value)
+    {
+        return $this->status;
+    }
+
+    /**
+     * Append title attribute from translation table.
      *
      * @return string title
+     */
+    public function getTitleAttribute($value)
+    {
+        return $this->title;
+    }
+
+    /**
+     * Append thumb attribute.
+     *
+     * @return string
+     */
+    public function getThumbAttribute($value)
+    {
+        return $this->present()->thumbSrc(null, 22);
+    }
+
+    /**
+     * Append website attribute from translation table.
+     *
+     * @return string
      */
     public function getWebsiteAttribute()
     {
