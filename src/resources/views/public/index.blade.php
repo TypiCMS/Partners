@@ -1,6 +1,6 @@
 @extends('pages::public.master')
 
-@section('bodyClass', 'body-partners body-partners-index body-page body-page-' . $page->id)
+@section('bodyClass', 'body-partners body-partners-index body-page body-page-'.$page->id)
 
 @section('main')
 
