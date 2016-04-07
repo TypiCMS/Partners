@@ -58,7 +58,7 @@ class Partner extends Base
      *
      * @return string
      */
-    public function getStatusAttribute($value)
+    public function getStatusAttribute()
     {
         return $this->status;
     }
@@ -68,7 +68,7 @@ class Partner extends Base
      *
      * @return string title
      */
-    public function getTitleAttribute($value)
+    public function getTitleAttribute()
     {
         return $this->title;
     }
@@ -78,7 +78,7 @@ class Partner extends Base
      *
      * @return string
      */
-    public function getThumbAttribute($value)
+    public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
     }
