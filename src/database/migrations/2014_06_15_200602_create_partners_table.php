@@ -18,24 +18,13 @@ class CreatePartnersTable extends Migration
             $table->boolean('homepage')->default(0);
             $table->integer('position')->unsigned()->default(1);
             $table->string('image')->nullable();
+            $table->json('status');
+            $table->json('title');
+            $table->json('slug');
+            $table->json('website');
+            $table->json('summary');
+            $table->json('body');
             $table->timestamps();
-        });
-
-        Schema::create('partner_translations', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('partner_id')->unsigned();
-            $table->string('locale');
-            $table->boolean('status')->default(0);
-            $table->string('title');
-            $table->string('slug')->nullable();
-            $table->string('website')->nullable();
-            $table->text('summary');
-            $table->text('body');
-            $table->timestamps();
-            $table->unique(['partner_id', 'locale']);
-            $table->unique(['locale', 'slug']);
-            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
         });
     }
 
@@ -46,7 +35,6 @@ class CreatePartnersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('partner_translations');
         Schema::drop('partners');
     }
 }
