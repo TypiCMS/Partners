@@ -10,7 +10,6 @@ use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Models\PartnerTranslation;
 use TypiCMS\Modules\Partners\Repositories\CacheDecorator;
 use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
