@@ -5,11 +5,11 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
+use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(PartnerInterface $partner)
+    public function __construct(EloquentPartner $partner)
     {
         parent::__construct($partner);
     }

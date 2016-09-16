@@ -15,7 +15,7 @@ class Partner extends Base
 
     protected $presenter = 'TypiCMS\Modules\Partners\Presenters\ModulePresenter';
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'exit'];
 
     public $translatable = [
         'title',

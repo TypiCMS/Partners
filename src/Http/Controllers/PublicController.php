@@ -3,11 +3,11 @@
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
+use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(PartnerInterface $partner)
+    public function __construct(EloquentPartner $partner)
     {
         parent::__construct($partner);
     }

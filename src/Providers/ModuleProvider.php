@@ -8,9 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Repositories\CacheDecorator;
 use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class ModuleProvider extends ServiceProvider
@@ -65,14 +63,6 @@ class ModuleProvider extends ServiceProvider
             $view->page = TypiCMS::getPageLinkedToModule('partners');
         });
 
-        $app->bind('TypiCMS\Modules\Partners\Repositories\PartnerInterface', function (Application $app) {
-            $repository = new EloquentPartner(new Partner());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], 'partners', 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('Partners', EloquentPartner::class);
     }
 }
