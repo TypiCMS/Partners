@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Partners\Repositories;
 
+use TypiCMS\Modules\Core\EloquentRepository;
 use TypiCMS\Modules\Partners\Models\Partner;
 
 class EloquentPartner extends EloquentRepository
