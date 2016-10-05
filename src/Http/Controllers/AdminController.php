@@ -77,8 +77,24 @@ class AdminController extends BaseAdminController
      */
     public function update(Partner $partner, FormRequest $request)
     {
-        $this->repository->update(request('id'), $request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $partner);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Partners\Models\Partner $partner
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Partner $partner)
+    {
+        $deleted = $this->repository->delete($partner);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }
