@@ -6,6 +6,15 @@ use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class PartnerTranslation extends BaseTranslation
 {
+    protected $fillable = [
+        'title',
+        'slug',
+        'status',
+        'website',
+        'summary',
+        'body',
+    ];
+
     /**
      * get the parent model.
      */
