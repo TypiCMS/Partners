@@ -2,7 +2,7 @@
 
 @section('bodyClass', 'body-partners body-partners-index body-page body-page-'.$page->id)
 
-@section('main')
+@section('content')
 
     {!! $page->present()->body !!}
 
