@@ -19,7 +19,7 @@
 
 @include('core::form._title-and-slug')
 {!! TranslatableBootForm::hidden('status')->value(0) !!}
-{!! TranslatableBootForm::checkbox(__('Online'), 'status') !!}
+{!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
 {!! TranslatableBootForm::text(__('Website'), 'website') !!}
 {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
 {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
