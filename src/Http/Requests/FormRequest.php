@@ -11,9 +11,9 @@ class FormRequest extends AbstractFormRequest
         return [
             'position' => 'required|integer|min:1',
             'image' => 'image|max:2000',
-            'title.*' => 'max:255',
-            'slug.*' => 'max:255',
-            'website.*' => 'url',
+            'title.*' => 'nullable|max:255',
+            'slug.*' => 'nullable|alpha_dash|max:255',
+            'website.*' => 'nullable|url',
         ];
     }
 }
