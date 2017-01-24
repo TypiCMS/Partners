@@ -26,7 +26,7 @@ class Partner extends Base
         'body',
     ];
 
-    protected $appends = ['thumb', 'website'];
+    protected $appends = ['thumb'];
 
     public $attachments = [
         'image',
@@ -40,15 +40,5 @@ class Partner extends Base
     public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
-    }
-
-    /**
-     * Append website attribute from translation table.
-     *
-     * @return string
-     */
-    public function getWebsiteAttribute()
-    {
-        return $this->website;
     }
 }
