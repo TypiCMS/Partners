@@ -21,12 +21,12 @@
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="status" class="status st-sort">@lang('Status')</th>
-                    <th st-sort="image" class="image st-sort">@lang('Image')</th>
-                    <th st-sort="position" st-sort-default="true" class="position st-sort">@lang('Position')</th>
-                    <th st-sort="homepage" class="homepage st-sort">@lang('Home')</th>
-                    <th st-sort="title" class="title st-sort">@lang('Title')</th>
-                    <th st-sort="website" class="website st-sort">@lang('Website')</th>
+                    <th st-sort="status" class="status st-sort">{{ __('Status') }}</th>
+                    <th st-sort="image" class="image st-sort">{{ __('Image') }}</th>
+                    <th st-sort="position" st-sort-default="true" class="position st-sort">{{ __('Position') }}</th>
+                    <th st-sort="homepage" class="homepage st-sort">{{ __('Home') }}</th>
+                    <th st-sort="title" class="title st-sort">{{ __('Title') }}</th>
+                    <th st-sort="website" class="website st-sort">{{ __('Website') }}</th>
                 </tr>
                 <tr>
                     <td colspan="6"></td>
