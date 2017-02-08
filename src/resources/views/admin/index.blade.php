@@ -53,8 +53,8 @@
                         <input class="form-control input-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model)">
                     </td>
                     <td>@{{ model.homepage }}</td>
-                    <td>@{{ model.title }}</td>
-                    <td>@{{ model.website }}</td>
+                    <td>@{{ model.title | translated }}</td>
+                    <td>@{{ model.website | translated }}</td>
                 </tr>
             </tbody>
             <tfoot>
