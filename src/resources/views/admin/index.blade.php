@@ -25,16 +25,16 @@
                     <th st-sort="image" class="image st-sort">{{ __('Image') }}</th>
                     <th st-sort="position" st-sort-default="true" class="position st-sort">{{ __('Position') }}</th>
                     <th st-sort="homepage" class="homepage st-sort">{{ __('Home') }}</th>
-                    <th st-sort="title" class="title st-sort">{{ __('Title') }}</th>
-                    <th st-sort="website" class="website st-sort">{{ __('Website') }}</th>
+                    <th st-sort="title_translated" class="title_translated st-sort">{{ __('Title') }}</th>
+                    <th st-sort="website_translated" class="website_translated st-sort">{{ __('Website') }}</th>
                 </tr>
                 <tr>
                     <td colspan="6"></td>
                     <td>
-                        <input st-search="title" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td>
-                        <input st-search="website" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="website_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                 </tr>
             </thead>
@@ -53,8 +53,8 @@
                         <input class="form-control input-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model)">
                     </td>
                     <td>@{{ model.homepage }}</td>
-                    <td>@{{ model.title | translated }}</td>
-                    <td>@{{ model.website | translated }}</td>
+                    <td>@{{ model.title_translated }}</td>
+                    <td>@{{ model.website_translated }}</td>
                 </tr>
             </tbody>
             <tfoot>
