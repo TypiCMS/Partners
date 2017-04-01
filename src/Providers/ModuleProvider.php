@@ -24,13 +24,11 @@ class ModuleProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'partners');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'partners');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/partners'),
         ], 'views');
-        $this->publishes([
-            __DIR__.'/../database' => base_path('database'),
-        ], 'migrations');
 
         AliasLoader::getInstance()->alias('Partners', Partners::class);
 
