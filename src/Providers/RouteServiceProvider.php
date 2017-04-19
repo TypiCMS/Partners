@@ -44,13 +44,13 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('partners', 'AdminController@index')->name('admin::index-partners');
-                $router->get('partners/create', 'AdminController@create')->name('admin::create-partner');
-                $router->get('partners/{partner}/edit', 'AdminController@edit')->name('admin::edit-partner');
-                $router->post('partners', 'AdminController@store')->name('admin::store-partner');
-                $router->put('partners/{partner}', 'AdminController@update')->name('admin::update-partner');
-                $router->patch('partners/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-partner-ajax');
-                $router->delete('partners/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-partner');
+                $router->get('partners', 'AdminController@index')->name('admin::index-partners')->middleware('can:see-all-partners');
+                $router->get('partners/create', 'AdminController@create')->name('admin::create-partner')->middleware('can:create-partner');
+                $router->get('partners/{partner}/edit', 'AdminController@edit')->name('admin::edit-partner')->middleware('can:update-partner');
+                $router->post('partners', 'AdminController@store')->name('admin::store-partner')->middleware('can:create-partner');
+                $router->put('partners/{partner}', 'AdminController@update')->name('admin::update-partner')->middleware('can:update-partner');
+                $router->patch('partners/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-partner-ajax')->middleware('can:update-partner');
+                $router->delete('partners/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-partner')->middleware('can:delete-partner');
             });
         });
     }

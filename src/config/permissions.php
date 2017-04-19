@@ -2,9 +2,9 @@
 
 return [
     'partners' => [
-        'index-partners' => 'View list',
+        'see-all-partners' => 'View list',
         'create-partner' => 'Create',
-        'edit-partner' => 'Edit',
-        'destroy-partner' => 'Destroy',
+        'update-partner' => 'Edit',
+        'delete-partner' => 'Delete',
     ],
 ];
