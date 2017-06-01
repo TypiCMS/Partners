@@ -1,12 +1,12 @@
 @extends('core::admin.master')
 
-@section('title', __('partners::global.New'))
+@section('title', __('New partner'))
 
 @section('content')
 
     @include('core::admin._button-back', ['module' => 'partners'])
     <h1>
-        @lang('partners::global.New')
+        @lang('New partner')
     </h1>
 
     {!! BootForm::open()->action(route('admin::index-partners'))->multipart()->role('form') !!}
