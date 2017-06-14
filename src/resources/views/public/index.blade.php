@@ -8,8 +8,6 @@
 
     @include('files::public._files', ['model' => $page])
 
-    @if ($models->count())
-    @include('partners::public._list', ['items' => $models])
-    @endif
+    @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
 
 @endsection
