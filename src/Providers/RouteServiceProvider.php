@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Partners\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 
 class RouteServiceProvider extends ServiceProvider
@@ -20,23 +21,21 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
+     * @return null
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group(['namespace' => $this->namespace], function (Router $router) {
+        Route::group(['namespace' => $this->namespace], function (Router $router) {
 
             /*
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('partners')) {
                 $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (config('translatable.locales') as $lang) {
-                    if ($page->translate($lang)->status && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['as' => $lang.'.partners', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.partners.slug', 'uses' => 'PublicController@show']);
+                foreach (locales() as $lang) {
+                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-partners');
+                        $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::partner');
                     }
                 }
             }
@@ -44,18 +43,15 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/partners', 'AdminController@index')->name('admin::index-partners');
-            $router->get('admin/partners/create', 'AdminController@create')->name('admin::create-partner');
-            $router->get('admin/partners/{partner}/edit', 'AdminController@edit')->name('admin::edit-partner');
-            $router->post('admin/partners', 'AdminController@store')->name('admin::store-partner');
-            $router->put('admin/partners/{partner}', 'AdminController@update')->name('admin::update-partner');
-
-            /*
-             * API routes
-             */
-            $router->get('api/partners', 'ApiController@index')->name('api::index-partners');
-            $router->put('api/partners/{partner}', 'ApiController@update')->name('api::update-partner');
-            $router->delete('api/partners/{partner}', 'ApiController@destroy')->name('api::destroy-partner');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+                $router->get('partners', 'AdminController@index')->name('admin::index-partners')->middleware('can:see-all-partners');
+                $router->get('partners/create', 'AdminController@create')->name('admin::create-partner')->middleware('can:create-partner');
+                $router->get('partners/{partner}/edit', 'AdminController@edit')->name('admin::edit-partner')->middleware('can:update-partner');
+                $router->post('partners', 'AdminController@store')->name('admin::store-partner')->middleware('can:create-partner');
+                $router->put('partners/{partner}', 'AdminController@update')->name('admin::update-partner')->middleware('can:update-partner');
+                $router->patch('partners/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-partner-ajax')->middleware('can:update-partner');
+                $router->delete('partners/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-partner')->middleware('can:delete-partner');
+            });
         });
     }
 }

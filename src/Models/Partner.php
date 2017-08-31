@@ -2,31 +2,24 @@
 
 namespace TypiCMS\Modules\Partners\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Partners\Presenters\ModulePresenter;
 
 class Partner extends Base
 {
+    use HasTranslations;
     use Historable;
     use PresentableTrait;
-    use Translatable;
 
-    protected $presenter = 'TypiCMS\Modules\Partners\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
-    protected $fillable = [
-        'image',
-        'position',
-        'homepage',
-    ];
+    protected $guarded = ['id', 'exit'];
 
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
+    public $translatable = [
         'title',
         'slug',
         'status',
@@ -35,35 +28,41 @@ class Partner extends Base
         'body',
     ];
 
-    protected $appends = ['status', 'title', 'thumb', 'website'];
+    protected $appends = ['thumb', 'title_translated', 'website_translated', 'status_translated'];
 
     /**
-     * Columns that are file.
-     *
-     * @var array
-     */
-    public $attachments = [
-        'image',
-    ];
-
-    /**
-     * Append status attribute from translation table.
+     * Append title_translated attribute.
      *
      * @return string
      */
-    public function getStatusAttribute($value)
+    public function getTitleTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**
-     * Append title attribute from translation table.
+     * Append status_translated attribute.
      *
-     * @return string title
+     * @return string
      */
-    public function getTitleAttribute($value)
+    public function getStatusTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('status', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append website_translated attribute.
+     *
+     * @return string
+     */
+    public function getWebsiteTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+        return $this->translate('website', config('typicms.content_locale', $locale));
     }
 
     /**
@@ -77,12 +76,12 @@ class Partner extends Base
     }
 
     /**
-     * Append website attribute from translation table.
+     * This model belongs to one image.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getWebsiteAttribute($value)
+    public function image()
     {
-        return $value;
+        return $this->belongsTo(File::class, 'image_id');
     }
 }

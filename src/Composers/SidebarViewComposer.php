@@ -11,16 +11,18 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        $view->sidebar->group(trans('global.menus.content'), function (SidebarGroup $group) {
-            $group->addItem(trans('partners::global.name'), function (SidebarItem $item) {
+        if (Gate::denies('see-all-partners')) {
+            return;
+        }
+        $view->sidebar->group(__('Content'), function (SidebarGroup $group) {
+            $group->id = 'content';
+            $group->weight = 30;
+            $group->addItem(__('Partners'), function (SidebarItem $item) {
                 $item->id = 'partners';
                 $item->icon = config('typicms.partners.sidebar.icon', 'icon fa fa-fw fa-cubes');
                 $item->weight = config('typicms.partners.sidebar.weight');
                 $item->route('admin::index-partners');
                 $item->append('admin::create-partner');
-                $item->authorize(
-                    Gate::allows('index-partners')
-                );
             });
         });
     }

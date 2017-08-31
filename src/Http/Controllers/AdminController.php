@@ -5,11 +5,11 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Repositories\PartnerInterface;
+use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(PartnerInterface $partner)
+    public function __construct(EloquentPartner $partner)
     {
         parent::__construct($partner);
     }
@@ -21,7 +21,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->all([], true);
+        $models = $this->repository->with('image')->findAll();
         app('JavaScript')->put('models', $models);
 
         return view('partners::admin.index');
@@ -34,7 +34,8 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->getModel();
+        $model = $this->repository->createModel();
+        app('JavaScript')->put('model', $model);
 
         return view('partners::admin.create')
             ->with(compact('model'));
@@ -49,6 +50,8 @@ class AdminController extends BaseAdminController
      */
     public function edit(Partner $partner)
     {
+        app('JavaScript')->put('model', $partner);
+
         return view('partners::admin.edit')
             ->with(['model' => $partner]);
     }
@@ -77,8 +80,24 @@ class AdminController extends BaseAdminController
      */
     public function update(Partner $partner, FormRequest $request)
     {
-        $this->repository->update($request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $partner);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Partners\Models\Partner $partner
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Partner $partner)
+    {
+        $deleted = $this->repository->delete($partner);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }

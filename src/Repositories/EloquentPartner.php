@@ -2,13 +2,12 @@
 
 namespace TypiCMS\Modules\Partners\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\EloquentRepository;
+use TypiCMS\Modules\Partners\Models\Partner;
 
-class EloquentPartner extends RepositoriesAbstract implements PartnerInterface
+class EloquentPartner extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'partners';
+
+    protected $model = Partner::class;
 }
