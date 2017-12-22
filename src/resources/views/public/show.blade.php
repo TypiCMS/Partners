@@ -14,7 +14,7 @@
         <h1 class="partner-title">{{ $model->title }}</h1>
         {!! $model->present()->thumb(null, 200) !!}
         <p class="partner-website">
-            <a class="partner-website-link" href="{{ $model->website }}" target="_blank">{{ $model->website }}</a>
+            <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
         </p>
         <p class="partner-summary">{{ nl2br($model->summary) }}</p>
         <div class="partner-body">{!! $model->present()->body !!}</div>
