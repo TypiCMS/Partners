@@ -31,13 +31,15 @@ class RouteServiceProvider extends ServiceProvider
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('partners')) {
-                $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (locales() as $lang) {
-                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-partners');
-                        $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::partner');
+                $router->middleware('public')->group(function (Router $router) use ($page) {
+                    $options = $page->private ? ['middleware' => 'auth'] : [];
+                    foreach (locales() as $lang) {
+                        if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                            $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-partners');
+                            $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::partner');
+                        }
                     }
-                }
+                });
             }
 
             /*
