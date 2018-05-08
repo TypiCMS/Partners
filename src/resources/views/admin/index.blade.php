@@ -18,7 +18,7 @@
 
     <div class="table-responsive">
 
-        <table st-persist="partnersTable" st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
+        <table st-persist="partnersTable" st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-main">
             <thead>
                 <tr>
                     <th class="delete"></th>
@@ -33,10 +33,10 @@
                 <tr>
                     <td colspan="6"></td>
                     <td>
-                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="title_translated" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="website_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="website_translated" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                 </tr>
             </thead>
@@ -54,7 +54,7 @@
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
                     <td>
-                        <input class="form-control input-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model, 'position')">
+                        <input class="form-control form-control-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model, 'position')">
                     </td>
                     <td>@{{ model.homepage }}</td>
                     <td>@{{ model.title_translated }}</td>
