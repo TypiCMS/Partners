@@ -51,8 +51,17 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('partners/{partner}/edit', 'AdminController@edit')->name('admin::edit-partner')->middleware('can:update-partner');
                 $router->post('partners', 'AdminController@store')->name('admin::store-partner')->middleware('can:create-partner');
                 $router->put('partners/{partner}', 'AdminController@update')->name('admin::update-partner')->middleware('can:update-partner');
-                $router->patch('partners/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-partner-ajax')->middleware('can:update-partner');
-                $router->delete('partners/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-partner')->middleware('can:delete-partner');
+            });
+
+            /*
+             * API routes
+             */
+            $router->middleware('api')->prefix('api')->group(function (Router $router) {
+                $router->middleware('auth:api')->group(function (Router $router) {
+                    $router->get('partners', 'ApiController@index')->name('api::index-partners')->middleware('can:see-all-partners');
+                    $router->patch('partners/{partner}', 'ApiController@updatePartial')->name('api::update-partner')->middleware('can:update-partner');
+                    $router->delete('partners/{partner}', 'ApiController@destroy')->name('api::destroy-partner')->middleware('can:delete-partner');
+                });
             });
         });
     }

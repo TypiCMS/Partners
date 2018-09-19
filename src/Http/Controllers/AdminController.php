@@ -22,7 +22,6 @@ class AdminController extends BaseAdminController
     public function index()
     {
         $models = $this->repository->with('image')->findAll();
-        app('JavaScript')->put('models', $models);
 
         return view('partners::admin.index');
     }
@@ -83,21 +82,5 @@ class AdminController extends BaseAdminController
         $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $partner);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \TypiCMS\Modules\Partners\Models\Partner $partner
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(Partner $partner)
-    {
-        $deleted = $this->repository->delete($partner);
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
     }
 }
