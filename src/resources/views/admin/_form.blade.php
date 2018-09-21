@@ -6,18 +6,11 @@
 @endcomponent
 
 {!! BootForm::hidden('id') !!}
-
-@include('core::admin._image-fieldset', ['field' => 'image'])
+{!! BootForm::hidden('position')->value($model->position ?: 0) !!}
 
 <div class="form-group">
     {!! BootForm::hidden('homepage')->value(0) !!}
     {!! BootForm::checkbox(__('Homepage'), 'homepage') !!}
-</div>
-
-<div class="row">
-    <div class="col-sm-2">
-        {!! BootForm::text(__('Position'), 'position')->type('number')->min(1)->required() !!}
-    </div>
 </div>
 
 @include('core::form._title-and-slug')
