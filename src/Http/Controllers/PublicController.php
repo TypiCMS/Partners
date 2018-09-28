@@ -19,7 +19,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->all();
+        $models = $this->repository->with('image')->all();
 
         return view('partners::public.index')
             ->with(compact('models'));

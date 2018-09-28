@@ -6,7 +6,9 @@
 @endcomponent
 
 {!! BootForm::hidden('id') !!}
-{!! BootForm::hidden('position')->value($model->position ?: 0) !!}
+
+<filepicker related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></filepicker>
+<file-field type="image" field="image_id" data="{{ $model->image }}"></file-field>
 
 <div class="form-group">
     {!! BootForm::hidden('homepage')->value(0) !!}

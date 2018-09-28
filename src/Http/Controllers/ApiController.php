@@ -17,11 +17,12 @@ class ApiController extends BaseApiController
 
     public function index(Request $request)
     {
-        $models = QueryBuilder::for(Partner::class)
+        $data = QueryBuilder::for(Partner::class)
+            ->with('image')
             ->translated($request->input('translatable_fields'))
             ->paginate($request->input('per_page'));
 
-        return $models;
+        return $data;
     }
 
     protected function updatePartial(Partner $partner, Request $request)

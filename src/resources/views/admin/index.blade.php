@@ -7,7 +7,7 @@
 <item-list
     url-base="/api/partners"
     locale="{{ config('typicms.content_locale') }}"
-    fields="id,position"
+    fields="id,position,image_id"
     translatable-fields="status,title"
     table="partners"
     title="partners"

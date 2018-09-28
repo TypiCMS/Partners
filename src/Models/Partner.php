@@ -35,18 +35,7 @@ class Partner extends Base implements Sortable
         'order_column_name' => 'position',
     ];
 
-    protected $appends = ['thumb', 'website_translated'];
-
-    /**
-     * Append website_translated attribute.
-     *
-     * @return string
-     */
-    public function getWebsiteTranslatedAttribute()
-    {
-        $locale = config('app.locale');
-        return $this->translate('website', config('typicms.content_locale', $locale));
-    }
+    protected $appends = ['thumb'];
 
     /**
      * Append thumb attribute.
