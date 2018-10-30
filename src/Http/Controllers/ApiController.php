@@ -3,7 +3,9 @@
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
+use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Partners\Models\Partner;
 use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
@@ -18,7 +20,10 @@ class ApiController extends BaseApiController
     public function index(Request $request)
     {
         $data = QueryBuilder::for(Partner::class)
-            ->with('image')
+            ->allowedFilters([
+                Filter::custom('title', FilterOr::class),
+            ])
+            ->allowedIncludes('image')
             ->translated($request->input('translatable_fields'))
             ->paginate($request->input('per_page'));
 
