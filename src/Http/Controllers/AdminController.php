@@ -21,8 +21,6 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->with('image')->findAll();
-
         return view('partners::admin.index');
     }
 
