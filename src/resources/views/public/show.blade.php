@@ -3,7 +3,7 @@
 @section('title', $model->title.' – '.__('Partners').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('image', $model->present()->thumbUrl())
+@section('image', $model->present()->image())
 @section('bodyClass', 'body-partners body-partner-'.$model->id.' body-page body-page-'.$page->id)
 
 @section('content')
@@ -12,7 +12,7 @@
 
     <article class="partner">
         <h1 class="partner-title">{{ $model->title }}</h1>
-        {!! $model->present()->thumb(null, 200) !!}
+        <img src="{!! $model->present()->image(null, 200) !!}" alt="">
         <p class="partner-website">
             <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
         </p>
