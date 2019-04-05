@@ -22,6 +22,8 @@ class Partner extends Base implements Sortable
 
     protected $guarded = ['id', 'exit'];
 
+    protected $appends = ['thumb'];
+
     public $translatable = [
         'title',
         'slug',
@@ -35,8 +37,6 @@ class Partner extends Base implements Sortable
         'order_column_name' => 'position',
     ];
 
-    protected $appends = ['thumb'];
-
     /**
      * Append thumb attribute.
      *
@@ -44,7 +44,7 @@ class Partner extends Base implements Sortable
      */
     public function getThumbAttribute()
     {
-        return $this->present()->thumbSrc(null, 22);
+        return $this->present()->thumbSrc(null, 44);
     }
 
     /**
