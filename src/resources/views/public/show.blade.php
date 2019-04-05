@@ -12,7 +12,7 @@
 
     <article class="partner">
         <h1 class="partner-title">{{ $model->title }}</h1>
-        <img src="{!! $model->present()->image(null, 200) !!}" alt="">
+        <img class="partner-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
         <p class="partner-website">
             <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
         </p>
