@@ -9,6 +9,8 @@
     @include('files::public._documents', ['model' => $page])
     @include('files::public._images', ['model' => $page])
 
+    @include('partners::public._itemlist-json-ld', ['items' => $models])
+
     @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
 
 @endsection

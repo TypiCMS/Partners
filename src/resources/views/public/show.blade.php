@@ -10,6 +10,8 @@
 
     @include('core::public._btn-prev-next', ['module' => 'Partners', 'model' => $model])
 
+    @include('partners::public._json-ld', ['partner' => $model])
+
     <article class="partner">
         <h1 class="partner-title">{{ $model->title }}</h1>
         <img class="partner-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
