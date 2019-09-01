@@ -3,15 +3,9 @@
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(EloquentPartner $partner)
-    {
-        parent::__construct($partner);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +13,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->with('image')->all();
+        $models = $this->model->with('image')->all();
 
         return view('partners::public.index')
             ->with(compact('models'));
@@ -32,7 +26,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->model->bySlug($slug);
 
         return view('partners::public.show')
             ->with(compact('model'));

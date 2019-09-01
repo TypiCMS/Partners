@@ -8,15 +8,9 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class ApiController extends BaseApiController
 {
-    public function __construct(EloquentPartner $partner)
-    {
-        parent::__construct($partner);
-    }
-
     public function index(Request $request)
     {
         $data = QueryBuilder::for(Partner::class)
@@ -48,7 +42,7 @@ class ApiController extends BaseApiController
         }
         $saved = $partner->save();
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
 
         return response()->json([
             'error' => !$saved,
@@ -57,7 +51,7 @@ class ApiController extends BaseApiController
 
     public function destroy(Partner $partner)
     {
-        $deleted = $this->repository->delete($partner);
+        $deleted = $partner->delete();
 
         return response()->json([
             'error' => !$deleted,

@@ -5,15 +5,9 @@ namespace TypiCMS\Modules\Partners\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(EloquentPartner $partner)
-    {
-        parent::__construct($partner);
-    }
-
     /**
      * List models.
      *
@@ -31,7 +25,7 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->createModel();
+        $model = new;
 
         return view('partners::admin.create')
             ->with(compact('model'));
@@ -59,7 +53,7 @@ class AdminController extends BaseAdminController
      */
     public function store(FormRequest $request)
     {
-        $partner = $this->repository->create($request->all());
+        $partner = ::create($request->all());
 
         return $this->redirect($request, $partner);
     }
@@ -74,7 +68,7 @@ class AdminController extends BaseAdminController
      */
     public function update(Partner $partner, FormRequest $request)
     {
-        $this->repository->update($request->id, $request->all());
+        ::update($request->id, $request->all());
 
         return $this->redirect($request, $partner);
     }

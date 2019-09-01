@@ -9,7 +9,6 @@ use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Partners\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Partners\Facades\Partners;
 use TypiCMS\Modules\Partners\Models\Partner;
-use TypiCMS\Modules\Partners\Repositories\EloquentPartner;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -63,6 +62,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('Partners', EloquentPartner::class);
+        $app->bind('Partners', Partner::class);
     }
 }
