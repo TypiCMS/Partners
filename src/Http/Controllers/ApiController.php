@@ -2,7 +2,9 @@
 
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
@@ -11,7 +13,7 @@ use TypiCMS\Modules\Partners\Models\Partner;
 
 class ApiController extends BaseApiController
 {
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(Partner::class)
             ->allowedFilters([
@@ -24,7 +26,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Partner $partner, Request $request)
+    protected function updatePartial(Partner $partner, Request $request): JsonResponse
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -42,14 +44,12 @@ class ApiController extends BaseApiController
         }
         $saved = $partner->save();
 
-        $this->model->forgetCache();
-
         return response()->json([
             'error' => !$saved,
         ]);
     }
 
-    public function destroy(Partner $partner)
+    public function destroy(Partner $partner): JsonResponse
     {
         $deleted = $partner->delete();
 
