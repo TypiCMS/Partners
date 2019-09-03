@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Partners\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -37,22 +38,12 @@ class Partner extends Base implements Sortable
         'order_column_name' => 'position',
     ];
 
-    /**
-     * Append thumb attribute.
-     *
-     * @return string
-     */
-    public function getThumbAttribute()
+    public function getThumbAttribute(): string
     {
         return $this->present()->image(null, 54);
     }
 
-    /**
-     * This model belongs to one image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function image()
+    public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_id');
     }
