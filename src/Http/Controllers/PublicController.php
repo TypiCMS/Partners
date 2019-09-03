@@ -18,7 +18,7 @@ class PublicController extends BasePublicController
 
     public function show($slug): View
     {
-        $model = Partner::where(column('slug'), $slug)->firstOrFails();
+        $model = Partner::where(column('slug'), $slug)->firstOrFail();
 
         return view('partners::public.show')
             ->with(compact('model'));
