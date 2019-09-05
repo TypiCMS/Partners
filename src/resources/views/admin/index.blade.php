@@ -11,6 +11,7 @@
     table="partners"
     title="partners"
     include="image"
+    appends="thumb"
     :searchable="['title']"
     :sorting="['position']">
 
