@@ -10,7 +10,10 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $models = Partner::published()->with('image')->get();
+        $models = Partner::published()
+            ->order()
+            ->with('image')
+            ->get();
 
         return view('partners::public.index')
             ->with(compact('models'));
