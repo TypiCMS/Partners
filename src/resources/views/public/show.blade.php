@@ -14,9 +14,9 @@
 
     <article class="partner">
         <h1 class="partner-title">{{ $model->title }}</h1>
-        @isset($model->image)
+        @empty(!$model->image)
         <img class="partner-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
-        @endisset
+        @endempty
         <p class="partner-website">
             <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
         </p>
