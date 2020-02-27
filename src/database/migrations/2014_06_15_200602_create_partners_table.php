@@ -7,8 +7,6 @@ class CreatePartnersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return null
      */
     public function up()
     {
@@ -30,8 +28,6 @@ class CreatePartnersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return null
      */
     public function down()
     {
