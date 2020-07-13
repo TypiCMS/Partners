@@ -15,7 +15,12 @@
     <article class="partner">
         <h1 class="partner-title">{{ $model->title }}</h1>
         @empty(!$model->image)
-        <img class="partner-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        <picture class="partner-picture">
+            <img class="partner-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
+            @empty(!$model->image->description)
+            <legend class="partner-picture-legend">{{ $model->image->description }}</legend>
+            @endempty
+        </picture>
         @endempty
         <p class="partner-website">
             <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
