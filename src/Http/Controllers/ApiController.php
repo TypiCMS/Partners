@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -27,7 +26,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Partner $partner, Request $request): JsonResponse
+    protected function updatePartial(Partner $partner, Request $request)
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -41,21 +40,13 @@ class ApiController extends BaseApiController
         }
 
         foreach ($data as $key => $value) {
-            $partner->$key = $value;
+            $partner->{$key} = $value;
         }
-        $saved = $partner->save();
-
-        return response()->json([
-            'error' => !$saved,
-        ]);
+        $partner->save();
     }
 
-    public function destroy(Partner $partner): JsonResponse
+    public function destroy(Partner $partner)
     {
-        $deleted = $partner->delete();
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
+        $partner->delete();
     }
 }
