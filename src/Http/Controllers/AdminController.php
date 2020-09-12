@@ -31,14 +31,14 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $partner = Partner::create($request->all());
+        $partner = Partner::create($request->validated());
 
         return $this->redirect($request, $partner);
     }
 
     public function update(Partner $partner, FormRequest $request): RedirectResponse
     {
-        $partner->update($request->all());
+        $partner->update($request->validated());
 
         return $this->redirect($request, $partner);
     }
