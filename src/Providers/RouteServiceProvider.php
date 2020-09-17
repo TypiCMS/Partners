@@ -6,18 +6,12 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
+use TypiCMS\Modules\Partners\Http\Controllers\AdminController;
+use TypiCMS\Modules\Partners\Http\Controllers\ApiController;
+use TypiCMS\Modules\Partners\Http\Controllers\PublicController;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * This namespace is applied to the controller routes in your routes file.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'TypiCMS\Modules\Partners\Http\Controllers';
-
     /**
      * Define the routes for the application.
      */
@@ -32,8 +26,8 @@ class RouteServiceProvider extends ServiceProvider
                     $options = $page->private ? ['middleware' => 'auth'] : [];
                     foreach (locales() as $lang) {
                         if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                            $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-partners');
-                            $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::partner');
+                            $router->get($uri, $options + ['uses' => [PublicController::class, 'index']])->name($lang.'::index-partners');
+                            $router->get($uri.'/{slug}', $options + ['uses' => [PublicController::class, 'show']])->name($lang.'::partner');
                         }
                     }
                 });
@@ -43,11 +37,11 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('partners', 'AdminController@index')->name('admin::index-partners')->middleware('can:read partners');
-                $router->get('partners/create', 'AdminController@create')->name('admin::create-partner')->middleware('can:create partners');
-                $router->get('partners/{partner}/edit', 'AdminController@edit')->name('admin::edit-partner')->middleware('can:update partners');
-                $router->post('partners', 'AdminController@store')->name('admin::store-partner')->middleware('can:create partners');
-                $router->put('partners/{partner}', 'AdminController@update')->name('admin::update-partner')->middleware('can:update partners');
+                $router->get('partners', [AdminController::class, 'index'])->name('admin::index-partners')->middleware('can:read partners');
+                $router->get('partners/create', [AdminController::class, 'create'])->name('admin::create-partner')->middleware('can:create partners');
+                $router->get('partners/{partner}/edit', [AdminController::class, 'edit'])->name('admin::edit-partner')->middleware('can:update partners');
+                $router->post('partners', [AdminController::class, 'store'])->name('admin::store-partner')->middleware('can:create partners');
+                $router->put('partners/{partner}', [AdminController::class, 'update'])->name('admin::update-partner')->middleware('can:update partners');
             });
 
             /*
@@ -55,9 +49,9 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('partners', 'ApiController@index')->middleware('can:read partners');
-                    $router->patch('partners/{partner}', 'ApiController@updatePartial')->middleware('can:update partners');
-                    $router->delete('partners/{partner}', 'ApiController@destroy')->middleware('can:delete partners');
+                    $router->get('partners', [ApiController::class, 'index'])->middleware('can:read partners');
+                    $router->patch('partners/{partner}', [ApiController::class, 'updatePartial'])->middleware('can:update partners');
+                    $router->delete('partners/{partner}', [ApiController::class, 'destroy'])->middleware('can:delete partners');
                 });
             });
         });
