@@ -12,7 +12,7 @@
     <header class="partner-header">
         <div class="partner-header-container">
             <div class="partner-header-navigator">
-                @include('core::public._btn-prev-next', ['module' => 'Partners', 'model' => $model])
+                @include('core::public._items-navigator', ['module' => 'Partners', 'model' => $model])
             </div>
             <h1 class="partner-title">{{ $model->title }}</h1>
             @empty(!$model->website)
