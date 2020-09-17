@@ -8,12 +8,23 @@
 
 @section('content')
 
-    @include('core::public._btn-prev-next', ['module' => 'Partners', 'model' => $model])
-
-    @include('partners::public._json-ld', ['partner' => $model])
-
-    <article class="partner">
-        <h1 class="partner-title">{{ $model->title }}</h1>
+<article class="partner">
+    <header class="partner-header">
+        <div class="partner-header-container">
+            <div class="partner-header-navigator">
+                @include('core::public._btn-prev-next', ['module' => 'Partners', 'model' => $model])
+            </div>
+            <h1 class="partner-title">{{ $model->title }}</h1>
+            @empty(!$model->website)
+            <p class="partner-website">
+                <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
+            </p>
+            @endempty
+        </div>
+    </header>
+    <div class="partner-body">
+        @include('partners::public._json-ld', ['partner' => $model])
+        <p class="partner-summary">{!! nl2br($model->summary) !!}</p>
         @empty(!$model->image)
         <picture class="partner-picture">
             <img class="partner-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
@@ -22,11 +33,8 @@
             @endempty
         </picture>
         @endempty
-        <p class="partner-website">
-            <a class="partner-website-link" href="{{ $model->website }}" target="_blank" rel="noopener noreferrer">{{ $model->website }}</a>
-        </p>
-        <p class="partner-summary">{!! nl2br($model->summary) !!}</p>
-        <div class="partner-body">{!! $model->present()->body !!}</div>
-    </article>
+        <div class="rich-content">{!! $model->present()->body !!}</div>
+    </div>
+</article>
 
 @endsection
