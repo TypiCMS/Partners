@@ -11,7 +11,7 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        if (Gate::denies('see-all-partners')) {
+        if (Gate::denies('read partners')) {
             return;
         }
         $view->sidebar->group(__('Content'), function (SidebarGroup $group) {
