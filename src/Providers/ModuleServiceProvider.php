@@ -10,7 +10,7 @@ use TypiCMS\Modules\Partners\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Partners\Facades\Partners;
 use TypiCMS\Modules\Partners\Models\Partner;
 
-class ModuleProvider extends ServiceProvider
+class ModuleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
