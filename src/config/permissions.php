@@ -4,7 +4,7 @@ return [
     'partners' => [
         'read partners' => 'Read',
         'create partners' => 'Create',
-        'update partners' => 'Edit',
+        'update partners' => 'Update',
         'delete partners' => 'Delete',
     ],
 ];
