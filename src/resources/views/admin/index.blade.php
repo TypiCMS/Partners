@@ -12,6 +12,7 @@
     title="partners"
     include="image"
     appends="thumb"
+    :exportable="true"
     :searchable="['title']"
     :sorting="['position']">
 

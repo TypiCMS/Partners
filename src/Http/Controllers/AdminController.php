@@ -3,8 +3,11 @@
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\Partners\Exports\PartnersExport;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Models\Partner;
 
@@ -13,6 +16,13 @@ class AdminController extends BaseAdminController
     public function index(): View
     {
         return view('partners::admin.index');
+    }
+
+    public function export(Request $request)
+    {
+        $filename = date('Y-m-d').' '.config('app.name').' partners.xlsx';
+
+        return Excel::download(new PartnersExport($request), $filename);
     }
 
     public function create(): View
