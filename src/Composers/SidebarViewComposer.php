@@ -19,7 +19,7 @@ class SidebarViewComposer
             $group->weight = 30;
             $group->addItem(__('Partners'), function (SidebarItem $item) {
                 $item->id = 'partners';
-                $item->icon = config('typicms.partners.sidebar.icon', 'icon fa fa-fw fa-cubes');
+                $item->icon = config('typicms.partners.sidebar.icon');
                 $item->weight = config('typicms.partners.sidebar.weight');
                 $item->route('admin::index-partners');
                 $item->append('admin::create-partner');
