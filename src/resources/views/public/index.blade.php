@@ -2,15 +2,23 @@
 
 @section('bodyClass', 'body-partners body-partners-index body-page body-page-'.$page->id)
 
-@section('content')
+@section('page')
 
-    <div class="rich-content">{!! $page->present()->body !!}</div>
+<div class="page-body">
 
-    @include('files::public._documents', ['model' => $page])
-    @include('files::public._images', ['model' => $page])
+    <div class="page-body-container">
 
-    @include('partners::public._itemlist-json-ld', ['items' => $models])
+        <div class="rich-content">{!! $page->present()->body !!}</div>
 
-    @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
+        @include('files::public._documents', ['model' => $page])
+        @include('files::public._images', ['model' => $page])
+
+        @include('partners::public._itemlist-json-ld', ['items' => $models])
+
+        @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
+
+    </div>
+
+</div>
 
 @endsection
