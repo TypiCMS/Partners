@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
-use TypiCMS\Modules\Partners\Exports\PartnersExport;
+use TypiCMS\Modules\Partners\Exports\Export;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Models\Partner;
 
@@ -22,7 +22,7 @@ class AdminController extends BaseAdminController
     {
         $filename = date('Y-m-d').' '.config('app.name').' partners.xlsx';
 
-        return Excel::download(new PartnersExport($request), $filename);
+        return Excel::download(new Export($request), $filename);
     }
 
     public function create(): View
