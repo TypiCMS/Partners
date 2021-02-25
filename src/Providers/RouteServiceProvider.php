@@ -34,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider
          */
         Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
             $router->get('partners', [AdminController::class, 'index'])->name('index-partners')->middleware('can:read partners');
-            $router->get('partners/export', [AdminController::class, 'export'])->name('admin::export-partners')->middleware('can:read partners');
+            $router->get('partners/export', [AdminController::class, 'export'])->name('export-partners')->middleware('can:read partners');
             $router->get('partners/create', [AdminController::class, 'create'])->name('create-partner')->middleware('can:create partners');
             $router->get('partners/{partner}/edit', [AdminController::class, 'edit'])->name('edit-partner')->middleware('can:read partners');
             $router->post('partners', [AdminController::class, 'store'])->name('store-partner')->middleware('can:create partners');
