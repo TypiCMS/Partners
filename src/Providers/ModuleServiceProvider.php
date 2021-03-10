@@ -20,18 +20,18 @@ class ModuleServiceProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['partners' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'partners');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'partners');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_partners_table.php.stub' => getMigrationFileName('create_partners_table'),
+            __DIR__.'/../../database/migrations/create_partners_table.php.stub' => getMigrationFileName('create_partners_table'),
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/partners'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/partners'),
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/../resources/scss' => resource_path('scss'),
+            __DIR__.'/../../resources/scss' => resource_path('scss'),
         ], 'resources');
 
         AliasLoader::getInstance()->alias('Partners', Partners::class);
