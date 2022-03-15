@@ -15,24 +15,13 @@ class ModuleServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.partners');
-        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
-
-        config(['typicms.modules.partners' => ['linkable_to_page']]);
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.modules.partners');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'partners');
 
-        $this->publishes([
-            __DIR__.'/../../database/migrations/create_partners_table.php.stub' => getMigrationFileName('create_partners_table'),
-        ], 'migrations');
-
-        $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/partners'),
-        ], 'views');
-
-        $this->publishes([
-            __DIR__.'/../../resources/scss' => resource_path('scss'),
-        ], 'resources');
+        $this->publishes([__DIR__.'/../../database/migrations/create_partners_table.php.stub' => getMigrationFileName('create_partners_table')], 'typicms-migrations');
+        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/vendor/partners')], 'typicms-views');
+        $this->publishes([__DIR__.'/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
         AliasLoader::getInstance()->alias('Partners', Partners::class);
 

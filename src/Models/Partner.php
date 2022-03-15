@@ -8,8 +8,8 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Core\Traits\Historable;
+use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Partners\Presenters\ModulePresenter;
 
 class Partner extends Base implements Sortable
