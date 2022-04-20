@@ -43,13 +43,15 @@ class AdminController extends BaseAdminController
     {
         $partner = Partner::create($request->validated());
 
-        return $this->redirect($request, $partner);
+        return $this->redirect($request, $partner)
+            ->withMessage(__('Item successfully created.'));
     }
 
     public function update(Partner $partner, FormRequest $request): RedirectResponse
     {
         $partner->update($request->validated());
 
-        return $this->redirect($request, $partner);
+        return $this->redirect($request, $partner)
+            ->withMessage(__('Item successfully updated.'));
     }
 }
