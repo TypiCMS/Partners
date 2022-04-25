@@ -6,7 +6,6 @@
 
 <item-list
     url-base="/api/partners"
-    locale="{{ config('typicms.content_locale') }}"
     fields="id,image_id,position,status,title"
     table="partners"
     title="partners"
