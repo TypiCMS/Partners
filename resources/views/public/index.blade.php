@@ -4,21 +4,21 @@
 
 @section('page')
 
-<div class="page-body">
+    <div class="page-body">
 
-    <div class="page-body-container">
+        <div class="page-body-container">
 
-        <div class="rich-content">{!! $page->present()->body !!}</div>
+            <div class="rich-content">{!! $page->present()->body !!}</div>
 
-        @include('files::public._document-list', ['model' => $page])
-        @include('files::public._image-list', ['model' => $page])
+            @include('files::public._document-list', ['model' => $page])
+            @include('files::public._image-list', ['model' => $page])
 
-        @include('partners::public._itemlist-json-ld', ['items' => $models])
+            @include('partners::public._itemlist-json-ld', ['items' => $models])
 
-        @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
+            @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
+
+        </div>
 
     </div>
-
-</div>
 
 @endsection
