@@ -24,6 +24,10 @@ class Partner extends Base implements Sortable
 
     protected $guarded = [];
 
+    protected $casts = [
+        'homepage' => 'boolean',
+    ];
+
     protected $appends = ['thumb'];
 
     public array $translatable = [
