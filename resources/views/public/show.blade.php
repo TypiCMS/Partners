@@ -26,12 +26,12 @@
             @include('partners::public._json-ld', ['partner' => $model])
             <p class="partner-summary">{!! nl2br($model->summary) !!}</p>
             @empty(!$model->image)
-                <picture class="partner-picture">
+                <figure class="partner-picture">
                     <img class="partner-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
                     @empty(!$model->image->description)
-                        <legend class="partner-picture-legend">{{ $model->image->description }}</legend>
+                        <figcaption class="partner-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
-                </picture>
+                </figure>
             @endempty
             <div class="rich-content">{!! $model->present()->body !!}</div>
         </div>
