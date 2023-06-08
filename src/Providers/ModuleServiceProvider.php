@@ -17,6 +17,8 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/partners.php', 'typicms.modules.partners');
 
+        $this->loadRoutesFrom(__DIR__ . '/../routes/partners.php');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'partners');
 
         $this->publishes([__DIR__ . '/../../database/migrations/create_partners_table.php.stub' => getMigrationFileName('create_partners_table')], 'typicms-migrations');
@@ -40,8 +42,6 @@ class ModuleServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->register(RouteServiceProvider::class);
-
         $this->app->bind('Partners', Partner::class);
     }
 }
