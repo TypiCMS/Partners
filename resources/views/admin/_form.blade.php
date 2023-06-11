@@ -7,11 +7,11 @@
     @include('core::admin._button-back', ['url' => $model->indexUrl(), 'title' => __('Partners')])
     @include('core::admin._title', ['default' => __('New partner')])
     @component('core::admin._buttons-form', ['model' => $model])
+        
     @endcomponent
 </div>
 
 <div class="content">
-
     @include('core::admin._form-errors')
 
     <file-manager related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></file-manager>
@@ -30,5 +30,4 @@
     {!! TranslatableBootForm::text(__('Website'), 'website')->placeholder('https://') !!}
     {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
     {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
-
 </div>
