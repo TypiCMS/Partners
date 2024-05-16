@@ -2,7 +2,6 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Partners\Http\Controllers\AdminController;
 use TypiCMS\Modules\Partners\Http\Controllers\ApiController;
 use TypiCMS\Modules\Partners\Http\Controllers\PublicController;
@@ -10,7 +9,7 @@ use TypiCMS\Modules\Partners\Http\Controllers\PublicController;
 /*
  * Front office routes
  */
-if ($page = TypiCMS::getPageLinkedToModule('partners')) {
+if ($page = getPageLinkedToModule('partners')) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
         if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
