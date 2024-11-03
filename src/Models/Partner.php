@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Partners\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -42,6 +43,15 @@ class Partner extends Base implements Sortable
     public $sortable = [
         'order_column_name' => 'position',
     ];
+
+    public function url($locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+        $route = $locale . '::partner';
+        $slug = $this->translate('slug', $locale) ?: null;
+
+        return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
+    }
 
     protected function thumb(): Attribute
     {
