@@ -25,9 +25,15 @@ class Partner extends Base implements Sortable
 
     protected $guarded = [];
 
-    protected $casts = [
-        'homepage' => 'boolean',
-    ];
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'homepage' => 'boolean',
+        ];
+    }
 
     protected $appends = ['thumb'];
 
