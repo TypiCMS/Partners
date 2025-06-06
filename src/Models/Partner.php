@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Partners\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -12,14 +13,28 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Core\Models\File;
+use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Partners\Presenters\ModulePresenter;
 
 /**
- * @property-read int $id
- * @property-read string $thumb
- * @property-read Carbon $created_at
- * @property-read Carbon $updated_at
+ * @property int $id
+ * @property bool $homepage
+ * @property int $position
+ * @property int|null $image_id
+ * @property array<array-key, mixed> $status
+ * @property array<array-key, mixed> $title
+ * @property array<array-key, mixed> $slug
+ * @property array<array-key, mixed> $website
+ * @property array<array-key, mixed> $summary
+ * @property array<array-key, mixed> $body
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, History> $history
+ * @property-read int|null $history_count
+ * @property-read File|null $image
+ * @property-read mixed $thumb
+ * @property-read mixed $translations
  */
 class Partner extends Base implements Sortable
 {
@@ -73,6 +88,7 @@ class Partner extends Base implements Sortable
         );
     }
 
+    /** @return BelongsTo<File, $this> */
     public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_id');
