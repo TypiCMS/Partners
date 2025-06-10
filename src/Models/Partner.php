@@ -68,7 +68,7 @@ class Partner extends Base implements Sortable
         'body',
     ];
 
-    public $sortable = [
+    public array $sortable = [
         'order_column_name' => 'position',
     ];
 
@@ -81,6 +81,9 @@ class Partner extends Base implements Sortable
         return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function thumb(): Attribute
     {
         return Attribute::make(
