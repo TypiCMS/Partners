@@ -47,9 +47,7 @@ class Partner extends Base implements Sortable
 
     protected $guarded = [];
 
-    /**
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     protected function casts(): array
     {
         return [
@@ -59,6 +57,7 @@ class Partner extends Base implements Sortable
 
     protected $appends = ['thumb'];
 
+    /** @var array<string> */
     public array $translatable = [
         'title',
         'slug',
@@ -68,11 +67,12 @@ class Partner extends Base implements Sortable
         'body',
     ];
 
+    /** @var array<string> */
     public array $sortable = [
         'order_column_name' => 'position',
     ];
 
-    public function url($locale = null): string
+    public function url(?string $locale = null): string
     {
         $locale = $locale ?: app()->getLocale();
         $route = $locale . '::partner';
@@ -81,9 +81,7 @@ class Partner extends Base implements Sortable
         return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
     }
 
-    /**
-     * @return Attribute<string, null>
-     */
+    /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
         return Attribute::make(
