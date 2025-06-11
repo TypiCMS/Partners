@@ -13,6 +13,7 @@ use TypiCMS\Modules\Partners\Models\Partner;
 
 class ApiController extends BaseApiController
 {
+    /** @return LengthAwarePaginator<int, mixed> */
     public function index(Request $request): LengthAwarePaginator
     {
         $query = Partner::query()->selectFields();
