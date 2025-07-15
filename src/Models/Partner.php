@@ -68,6 +68,11 @@ class Partner extends Base implements Sortable
     ];
 
     /** @var array<string> */
+    public array $tipTapContent = [
+        'body',
+    ];
+
+    /** @var array<string> */
     public array $sortable = [
         'order_column_name' => 'position',
     ];
