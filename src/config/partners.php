@@ -7,7 +7,7 @@ return [
         'position' => 'asc',
     ],
     'sidebar' => [
-        'icon' => '<i class="bi bi-person"></i>',
+        'icon' => '<i class="icon-user"></i>',
         'weight' => 70,
     ],
     'permissions' => [
