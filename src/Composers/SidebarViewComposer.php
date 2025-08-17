@@ -22,7 +22,6 @@ class SidebarViewComposer
                 $item->icon = config('typicms.modules.partners.sidebar.icon');
                 $item->weight = config('typicms.modules.partners.sidebar.weight');
                 $item->route('admin::index-partners');
-                $item->append('admin::create-partner');
             });
         });
     }
