@@ -4,8 +4,8 @@
 
 @section('content')
     <item-list url-base="/api/partners" fields="id,image_id,position,status,title" table="partners" title="partners" include="image" :exportable="true" :searchable="['title']" :sorting="['position']">
-        <template #add-button v-if="$can('create partners')">
-            @include('core::admin._button-create', ['module' => 'partners'])
+        <template #top-buttons v-if="$can('create partners')">
+            <x-core::create-button :url="route('admin::create-partner')" :label="__('Create partner')" />
         </template>
 
         <template #columns="{ sortArray }">
