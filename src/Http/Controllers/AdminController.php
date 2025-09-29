@@ -31,7 +31,7 @@ class AdminController extends BaseAdminController
         $model = new Partner();
 
         return view('partners::admin.create')
-            ->with(compact('model'));
+            ->with(['model' => $model]);
     }
 
     public function edit(Partner $partner): View

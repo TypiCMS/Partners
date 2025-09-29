@@ -79,7 +79,7 @@ class Partner extends Base implements Sortable
 
     public function url(?string $locale = null): string
     {
-        $locale = $locale ?: app()->getLocale();
+        $locale ??= app()->getLocale();
         $route = $locale . '::partner';
         $slug = $this->translate('slug', $locale) ?: null;
 

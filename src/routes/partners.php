@@ -1,5 +1,6 @@
 <?php
 
+use TypiCMS\Modules\Core\Models\Page;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Partners\Http\Controllers\AdminController;
@@ -9,11 +10,11 @@ use TypiCMS\Modules\Partners\Http\Controllers\PublicController;
 /*
  * Front office routes
  */
-if ($page = getPageLinkedToModule('partners')) {
+if (($page = getPageLinkedToModule('partners')) instanceof Page) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
         if ($page->isPublished($lang) && $path = $page->path($lang)) {
-            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router) {
+            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router): void {
                 $router->get('/', [PublicController::class, 'index'])->name('index-partners');
                 $router->get('{slug}', [PublicController::class, 'show'])->name('partner');
             });
@@ -24,7 +25,7 @@ if ($page = getPageLinkedToModule('partners')) {
 /*
  * Admin routes
  */
-Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
+Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router): void {
     $router->get('partners', [AdminController::class, 'index'])->name('index-partners')->middleware('can:read partners');
     $router->get('partners/export', [AdminController::class, 'export'])->name('export-partners')->middleware('can:read partners');
     $router->get('partners/create', [AdminController::class, 'create'])->name('create-partner')->middleware('can:create partners');
@@ -36,7 +37,7 @@ Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Ro
 /*
  * API routes
  */
-Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
+Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router): void {
     $router->get('partners', [ApiController::class, 'index'])->middleware('can:read partners');
     $router->patch('partners/{partner}', [ApiController::class, 'updatePartial'])->middleware('can:update partners');
     $router->delete('partners/{partner}', [ApiController::class, 'destroy'])->middleware('can:delete partners');
