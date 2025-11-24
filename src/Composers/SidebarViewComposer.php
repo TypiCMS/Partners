@@ -14,10 +14,10 @@ class SidebarViewComposer
         if (Gate::denies('read partners')) {
             return;
         }
-        $view->offsetGet('sidebar')->group(__('Content'), function (SidebarGroup $group): void {
+        $view->offsetGet('sidebar')->group(__(config('typicms.modules.partners.sidebar.group', 'Content')), function (SidebarGroup $group): void {
             $group->id = 'content';
             $group->weight = 30;
-            $group->addItem(__('Partners'), function (SidebarItem $item): void {
+            $group->addItem(__(config('typicms.modules.partners.sidebar.label', 'Partners')), function (SidebarItem $item): void {
                 $item->id = 'partners';
                 $item->icon = config('typicms.modules.partners.sidebar.icon');
                 $item->weight = config('typicms.modules.partners.sidebar.weight');
