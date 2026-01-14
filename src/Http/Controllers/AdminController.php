@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +14,7 @@ use TypiCMS\Modules\Partners\Exports\Export;
 use TypiCMS\Modules\Partners\Http\Requests\FormRequest;
 use TypiCMS\Modules\Partners\Models\Partner;
 
-class AdminController extends BaseAdminController
+final class AdminController extends BaseAdminController
 {
     public function index(): View
     {
@@ -30,29 +32,25 @@ class AdminController extends BaseAdminController
     {
         $model = new Partner();
 
-        return view('partners::admin.create')
-            ->with(['model' => $model]);
+        return view('partners::admin.create', ['model' => $model]);
     }
 
     public function edit(Partner $partner): View
     {
-        return view('partners::admin.edit')
-            ->with(['model' => $partner]);
+        return view('partners::admin.edit', ['model' => $partner]);
     }
 
     public function store(FormRequest $request): RedirectResponse
     {
         $partner = Partner::query()->create($request->validated());
 
-        return $this->redirect($request, $partner)
-            ->withMessage(__('Item successfully created.'));
+        return $this->redirect($request, $partner)->withMessage(__('Item successfully created.'));
     }
 
     public function update(Partner $partner, FormRequest $request): RedirectResponse
     {
         $partner->update($request->validated());
 
-        return $this->redirect($request, $partner)
-            ->withMessage(__('Item successfully updated.'));
+        return $this->redirect($request, $partner)->withMessage(__('Item successfully updated.'));
     }
 }

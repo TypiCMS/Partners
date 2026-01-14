@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Models\Page;
@@ -13,11 +15,14 @@ use TypiCMS\Modules\Partners\Http\Controllers\PublicController;
 if (($page = getPageLinkedToModule('partners')) instanceof Page) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
-        if ($page->isPublished($lang) && $path = $page->path($lang)) {
-            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router): void {
-                $router->get('/', [PublicController::class, 'index'])->name('index-partners');
-                $router->get('{slug}', [PublicController::class, 'show'])->name('partner');
-            });
+        if ($page->isPublished($lang) && ($path = $page->path($lang))) {
+            Route::middleware($middleware)
+                ->prefix($path)
+                ->name($lang . '::')
+                ->group(function (Router $router): void {
+                    $router->get('/', [PublicController::class, 'index'])->name('index-partners');
+                    $router->get('{slug}', [PublicController::class, 'show'])->name('partner');
+                });
         }
     }
 }
@@ -25,14 +30,35 @@ if (($page = getPageLinkedToModule('partners')) instanceof Page) {
 /*
  * Admin routes
  */
-Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router): void {
-    $router->get('partners', [AdminController::class, 'index'])->name('index-partners')->middleware('can:read partners');
-    $router->get('partners/export', [AdminController::class, 'export'])->name('export-partners')->middleware('can:read partners');
-    $router->get('partners/create', [AdminController::class, 'create'])->name('create-partner')->middleware('can:create partners');
-    $router->get('partners/{partner}/edit', [AdminController::class, 'edit'])->name('edit-partner')->middleware('can:read partners');
-    $router->post('partners', [AdminController::class, 'store'])->name('store-partner')->middleware('can:create partners');
-    $router->put('partners/{partner}', [AdminController::class, 'update'])->name('update-partner')->middleware('can:update partners');
-});
+Route::middleware('admin')
+    ->prefix('admin')
+    ->name('admin::')
+    ->group(function (Router $router): void {
+        $router
+            ->get('partners', [AdminController::class, 'index'])
+            ->name('index-partners')
+            ->middleware('can:read partners');
+        $router
+            ->get('partners/export', [AdminController::class, 'export'])
+            ->name('export-partners')
+            ->middleware('can:read partners');
+        $router
+            ->get('partners/create', [AdminController::class, 'create'])
+            ->name('create-partner')
+            ->middleware('can:create partners');
+        $router
+            ->get('partners/{partner}/edit', [AdminController::class, 'edit'])
+            ->name('edit-partner')
+            ->middleware('can:read partners');
+        $router
+            ->post('partners', [AdminController::class, 'store'])
+            ->name('store-partner')
+            ->middleware('can:create partners');
+        $router
+            ->put('partners/{partner}', [AdminController::class, 'update'])
+            ->name('update-partner')
+            ->middleware('can:update partners');
+    });
 
 /*
  * API routes

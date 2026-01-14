@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Partners\Http\Controllers;
 
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Partners\Models\Partner;
 
-class PublicController extends BasePublicController
+final class PublicController extends BasePublicController
 {
     public function index(): View
     {
@@ -16,8 +18,7 @@ class PublicController extends BasePublicController
             ->with('image')
             ->get();
 
-        return view('partners::public.index')
-            ->with(['models' => $models]);
+        return view('partners::public.index', ['models' => $models]);
     }
 
     public function show(string $slug): View
@@ -27,7 +28,6 @@ class PublicController extends BasePublicController
             ->whereSlugIs($slug)
             ->firstOrFail();
 
-        return view('partners::public.show')
-            ->with(['model' => $model]);
+        return view('partners::public.show', ['model' => $model]);
     }
 }

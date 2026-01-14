@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Partners\Providers;
 
 use Illuminate\Foundation\AliasLoader;
@@ -21,8 +23,14 @@ class ModuleServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'partners');
 
-        $this->publishes([__DIR__ . '/../../database/migrations/create_partners_table.php.stub' => getMigrationFileName('create_partners_table')], 'typicms-migrations');
-        $this->publishes([__DIR__ . '/../../resources/views' => resource_path('views/vendor/partners')], 'typicms-views');
+        $this->publishes([
+            __DIR__ . '/../../database/migrations/create_partners_table.php.stub' => getMigrationFileName(
+                'create_partners_table',
+            ),
+        ], 'typicms-migrations');
+        $this->publishes([
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/partners'),
+        ], 'typicms-views');
         $this->publishes([__DIR__ . '/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
         AliasLoader::getInstance()->alias('Partners', Partners::class);

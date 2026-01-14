@@ -1,7 +1,7 @@
 <div class="header">
     <x-core::back-button :url="$model->indexUrl()" :title="__('Partners')" />
     <x-core::title :$model :default="__('New partner')" />
-    <x-core::form-buttons :$model :locales="locales()" />
+    <x-core::form-buttons :$model />
 </div>
 
 <div class="content">
@@ -14,7 +14,7 @@
                 {!! BootForm::checkbox(__('Homepage'), 'homepage') !!}
             </div>
 
-            <x-core::title-and-slug-fields :locales="locales()" />
+            <x-core::title-and-slug-fields />
             <div class="mb-3">
                 {!! TranslatableBootForm::hidden('status')->value(0) !!}
                 {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
