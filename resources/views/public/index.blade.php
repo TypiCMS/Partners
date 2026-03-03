@@ -9,7 +9,15 @@
             @include('files::public._document-list', ['model' => $page])
             @include('files::public._image-list', ['model' => $page])
 
-            @include('partners::public._itemlist-json-ld', ['items' => $models])
+            <x-core::json-ld :schema="[
+                '@context' => 'https://schema.org',
+                '@type' => 'ItemList',
+                'itemListElement' => $models->map(fn ($item, $index) => [
+                    '@type' => 'ListItem',
+                    'position' => $index + 1,
+                    'url' => $item->url(),
+                ])->all(),
+            ]" />
 
             @includeWhen($models->count() > 0, 'partners::public._list', ['items' => $models])
         </div>

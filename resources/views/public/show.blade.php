@@ -24,7 +24,12 @@
             </div>
         </header>
         <div class="partner-body">
-            @include('partners::public._json-ld', ['partner' => $model])
+            <x-core::json-ld :schema="[
+                '@context' => 'https://schema.org',
+                '@type' => 'Organization',
+                'name' => $model->title,
+                'url' => $model->website,
+            ]" />
             <p class="partner-summary">{!! nl2br($model->summary) !!}</p>
             @if(!empty($model->image))
                 <figure class="partner-picture">
