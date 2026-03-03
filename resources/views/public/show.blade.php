@@ -11,7 +11,7 @@
         <header class="partner-header">
             <div class="partner-header-container">
                 <div class="partner-header-navigator">
-                    <x-core::items-navigator module="Partners" :$model :$page />
+                    <x-core::items-navigator :$model :$page />
                 </div>
                 <h1 class="partner-title">{{ $model->title }}</h1>
                 @if(!empty($model->website))
