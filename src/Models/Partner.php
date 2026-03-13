@@ -11,19 +11,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\HasAdminUrls;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
+use TypiCMS\Modules\Core\Traits\HasPresenterMethods;
 use TypiCMS\Modules\Core\Traits\HasSelectableFields;
 use TypiCMS\Modules\Core\Traits\HasSlugScope;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Core\Traits\Navigable;
 use TypiCMS\Modules\Core\Traits\Publishable;
-use TypiCMS\Modules\Partners\Presenters\ModulePresenter;
 use TypiCMS\Translatable\HasTranslations;
 
 /**
@@ -50,16 +49,14 @@ class Partner extends Model implements Sortable
     use Cachable;
     use HasAdminUrls;
     use HasConfigurableOrder;
+    use HasPresenterMethods;
     use HasSelectableFields;
     use HasSlugScope;
     use HasTranslations;
     use Historable;
     use Navigable;
-    use PresentableTrait;
     use Publishable;
     use SortableTrait;
-
-    protected string $presenter = ModulePresenter::class;
 
     protected $guarded = [];
 
@@ -105,7 +102,7 @@ class Partner extends Model implements Sortable
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(get: fn () => $this->present()->image(null, 54));
+        return Attribute::make(get: fn () => $this->imageUrl(null, 54));
     }
 
     /** @return BelongsTo<File, $this> */

@@ -3,7 +3,7 @@
 @section('title', $model->title . ' – ' . __('Partners') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('ogImage', $model->present()->ogImage())
+@section('ogImage', $model->ogImageUrl())
 @section('bodyClass', 'body-partners body-partner-' . $model->id . ' body-page body-page-' . $page->id)
 
 @section('content')
@@ -33,14 +33,14 @@
             <p class="partner-summary">{!! nl2br($model->summary) !!}</p>
             @if(!empty($model->image))
                 <figure class="partner-picture">
-                    <img class="partner-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
+                    <img class="partner-picture-image" src="{{ $model->imageUrl(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @if(!empty($model->image->description))
                         <figcaption class="partner-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
                 </figure>
             @endif
 
-            <div class="rich-content">{!! $model->present()->body !!}</div>
+            <div class="rich-content">{!! $model->formattedBody() !!}</div>
         </div>
     </article>
 @endsection
